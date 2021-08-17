@@ -24,6 +24,7 @@ public class JdbcTemplateConfiguration {
 	@Value("${db.password}")
 	private String password;
 	
+	
 	@Bean
 	public DataSource psqlDataSource(){	
 		
@@ -32,8 +33,7 @@ public class JdbcTemplateConfiguration {
 		dataSource.setDriverClassName(driverClass);
 		dataSource.setUrl(url);
 		dataSource.setUsername(username);
-		dataSource.setPassword(password);
-		
+		dataSource.setPassword(password);	
 		return dataSource;
 	}
 	

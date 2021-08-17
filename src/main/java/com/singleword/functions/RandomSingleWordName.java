@@ -16,7 +16,7 @@ public class RandomSingleWordName implements RandomNameGeneratorInterface {
 		StringBuilder name = new StringBuilder();
 		
 		while(name.length()<length) {
-			name.append(random.nextInt(25)+65);
+			name.append((char)(random.nextInt(25)+65));
 		}
 		
 		return name.toString();

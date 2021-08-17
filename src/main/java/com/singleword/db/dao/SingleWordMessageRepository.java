@@ -3,6 +3,8 @@ package com.singleword.db.dao;
 import java.sql.ResultSet;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -14,13 +16,16 @@ import com.singleword.db.entity.SingleWordMessage;
 public class SingleWordMessageRepository {
 	private JdbcTemplate connection;
 	
+	
+	
 	@Autowired
-	public SingleWordMessageRepository(JdbcTemplate connection) {
-		this.connection = connection;
+	public SingleWordMessageRepository(DataSource source) {
+			this.connection = new JdbcTemplate(source);
+			createTableNotExists();
 	}
 	
 	//change to some message interface to be able to use other message types later on
-	private static RowMapper<SingleWordMessage> messageMapper = (ResultSet rs, int rowNum) -> {
+	private  RowMapper<SingleWordMessage> messageMapper = (ResultSet rs, int rowNum) -> {
 			SingleWordMessage message = new SingleWordMessage();
 			message.setWord(rs.getString("word"));
 			
@@ -29,12 +34,12 @@ public class SingleWordMessageRepository {
 			message.setRandomName(rs.getString("username"));
 			return message;
 		};
-	
-	 {
+	// changed to method since initialization blocks are called before the constructor
+	 private void createTableNotExists(){
 		String createQuery = "CREATE TABLE IF NOT EXISTS thread_messages ("
 				+ "id SERIAL UNIQUE,"
-				+ "word VARCHAR (50)"
-				+ "sent_at DATE"
+				+ "word VARCHAR (50),"
+				+ "sent_at DATE,"
 				+ "username VARCHAR(10));";
 		connection.execute(createQuery);
 	}

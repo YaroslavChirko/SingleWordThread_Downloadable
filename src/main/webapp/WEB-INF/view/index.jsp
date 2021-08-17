@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page import="com.singleword.db.entity.SingleWordMessage"  %>
+<%@page isELIgnored="false" %>
 <html>
 <head>
-Welcome to single word thread
+<title>Welcome to single word thread</title>
 </head>
 
 <body>

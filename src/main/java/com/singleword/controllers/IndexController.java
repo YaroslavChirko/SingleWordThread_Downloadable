@@ -15,7 +15,7 @@ import com.singleword.db.entity.SingleWordMessage;
 public class IndexController {
 
 	@Autowired
-	SingleWordMessageRepository messageRepository;
+	private SingleWordMessageRepository messageRepository;
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	private String getIndex(HttpServletRequest req) {
