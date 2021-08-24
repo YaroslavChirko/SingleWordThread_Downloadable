@@ -1,12 +1,18 @@
 package com.singleword.db.entity;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import com.singleword.functions.RandomSingleWordName;
 
 
-
-public class SingleWordMessage {
+/**
+* class used to persist the messages,<br> it implements <code>Serializable</code>
+* interface which enables us to use it along with  object input and output streams
+*/
+public class SingleWordMessage implements Serializable{
+	
+	private static final long serialVersionUID = -4754530363203707343L;
 	//should add bean validation later
 	private String word;
 	private LocalDateTime sentAt;

@@ -5,19 +5,27 @@
 <html>
 <head>
 <title>Welcome to single word thread</title>
+<link rel="stylesheet" href="<c:url value='css/index.css'/>">
 </head>
 
 <body>
-	<c:forEach items="${messages}" var="message">
-		<p><c:out value="${message.word}"></c:out>
-		<p><c:out value="${message.randomName}"></c:out>
-		<p><c:out value="${message.sentAt}"></c:out>
-	</c:forEach>
+	<div class="messages">
+		<c:forEach items="${messages}" var="message">
+			<p><c:out value="${message.word}"></c:out>
+			<p><c:out value="${message.randomName}"></c:out>
+			<p><c:out value="${message.sentAt}"></c:out>
+			<br>
+			<br>
+		</c:forEach>
+	</div>
 	
-	
-	<form action="" method="post">
-		<textarea name="message" maxlength="50"></textarea>
-		<input type="submit" value="send">
-	</form>
+	<div class="inputs">
+		<form action="" method="post">
+			<textarea name="message" maxlength="50"></textarea>
+			<input type="submit" value="send">
+		</form>
+		
+		<button onclick="window.location.href = 'download'">download</button>
+	</div>
 </body>
 </html>

@@ -1,0 +1,19 @@
+html, body{
+	align-content:center;
+	width:97%;
+	height:95%;
+}
+
+.messages{
+		align-content:center;
+		max-height: 80%;
+		max-width:90%;
+		background-color:teal;
+		overflow:auto;
+}
+
+.inputs{
+	align-content:center;
+	max-height: 20%;
+	max-width:90%;
+}
