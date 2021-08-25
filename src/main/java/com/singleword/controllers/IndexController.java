@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.singleword.db.dao.SingleWordMessageRepository;
-import com.singleword.db.entity.SingleWordMessage;
 
 @Controller
 public class IndexController {
@@ -19,16 +18,14 @@ public class IndexController {
 	
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	private String getIndex(HttpServletRequest req) {
-		req.setAttribute("messages", messageRepository.getAllMessages());
+		req.setAttribute("threads", messageRepository.getAllThreads());
 		return "index";
 	}
 	
 	
 	@RequestMapping(value="/", method=RequestMethod.POST)
-	private void postIndex(@RequestParam("message") String word) {
-		SingleWordMessage message = new SingleWordMessage(word); 
-		
-		messageRepository.addMessage(message);
+	private void postIndex(@RequestParam("threadName") String threadName) {
+		messageRepository.addThread(threadName);
 	}
 	
 }

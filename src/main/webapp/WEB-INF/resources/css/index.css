@@ -4,7 +4,7 @@ html, body{
 	height:95%;
 }
 
-.messages{
+.messages,.threads{
 		align-content:center;
 		max-height: 80%;
 		max-width:90%;

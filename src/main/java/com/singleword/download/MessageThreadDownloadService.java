@@ -1,11 +1,13 @@
 package com.singleword.download;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.net.MalformedURLException;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
 import java.nio.file.Paths;
 import java.util.List;
 
@@ -42,17 +44,23 @@ public class MessageThreadDownloadService {
 	 * used to put all messages in file, filename could be arbitrary but for now it`ll be thread name
 	 */
 	public void prepareAllMessages(String filename) {
-		List<SingleWordMessage> messages = messageRepository.getAllMessages();
+		List<SingleWordMessage> messages = messageRepository.getAllMessages(messageRepository.getThreadIdForName(filename));
 		if(messages == null || messages.isEmpty()) {
 			return;
 		}
 		
 		try {
-			// due to append=false (probably)only last message added to file
-			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(new File("./"+filename+".txt"),false));
-			for(SingleWordMessage message : messages) {
-				out.writeObject(message);				
+			//for now it clears the file on each call, should optimize it by looking at the last submitted message(time) and time of file creation 
+			if(Files.exists(Paths.get("./"+filename+".txt"), LinkOption.NOFOLLOW_LINKS)){
+				Files.delete(Paths.get("./"+filename+".txt"));
 			}
+			//changed to buffered output stream since it can be easily read in text form
+			BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(new File("./"+filename+".txt"),true));
+			
+			for(SingleWordMessage message : messages) {
+				out.write(message.toString().getBytes());
+			}
+			out.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} 

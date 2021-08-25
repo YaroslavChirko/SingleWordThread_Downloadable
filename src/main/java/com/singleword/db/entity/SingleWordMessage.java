@@ -45,6 +45,11 @@ public class SingleWordMessage implements Serializable{
 	public synchronized void setRandomName(String randomName) {
 		this.randomName = randomName;
 	}
+
+	@Override
+	public String toString() {
+		return "SingleWordMessage \n[word=" + word + ", \nsentAt=" + sentAt + ", \nrandomName=" + randomName + "]\n\n";
+	}
 	
 	
 	
